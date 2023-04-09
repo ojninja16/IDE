@@ -29,7 +29,7 @@ class App extends Component {
                   buttonText="LOGIN WITH GITHUB"
                   className="git-login"
                   valid={true}
-                  redirectUri="http://samaj"
+                  redirectUri="_"
           />   </label>
             </div>
         </div>
