@@ -10,7 +10,7 @@ const App = () => {
   const checkCode=async()=>{
     try {
       console.log({code})
-      const res = await axios.post('http://localhost:3001/submit', {code, input: ['1','2']})
+      const res = await axios.post('http://20.239.79.148:3001/submit', {code, input: ['1','2']})
       console.log(res.data)
       setOutput(res.data.data)
     } catch (error) {
@@ -41,13 +41,16 @@ const App = () => {
           </div>
 
           <div className='bg-white'> <input type="text" id="large-input" class="block w-full h-full text-start p-2.5"></input></div>
-          <div >Output</div>
+          <div >Output
+            <div> {output} </div>
+          </div>
+        
           <div
             onClick={() => checkCode()}
             className="h-10 border-2 p-2 bg-green-400 justify-center items-center text-white font-poppins font-semibold text-[1rem] rounded-md pt-2 cursor-pointer px-0.75 rem py-1.5 rem  "
           >
             Submit Code
-    {output}
+   
 
           </div> 
       </div>
