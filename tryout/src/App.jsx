@@ -6,9 +6,21 @@ import { useState } from 'react';
 
 const App = () => {
   const [code, setCode] = useState('Write Code Here!');
-  const checkCode=()=>{
-    axios.post('http://localhost:3000/python', {code}).then((res)=>console.log(res));
-    };
+  const [output, setOutput] = useState('Write Code Here!');
+  const checkCode=async()=>{
+    try {
+      console.log({code})
+      const res = await axios.post('http://localhost:3001/submit', {code, input: ['1','2']})
+      console.log(res.data)
+      setOutput(res.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  const onChange = React.useCallback((value, viewUpdate) => {
+    setCode(value)
+  }, []);
 
   
   return (
@@ -23,9 +35,7 @@ const App = () => {
             width ="900px"
             theme="dark"
             extensions={[javascript({ jsx: true })]}
-            onChange={(editor, data, value) => {
-              setCode(editor.getValue());
-            }}
+            onChange={onChange}
             className="flex flex-col "
           />
           </div>
@@ -37,6 +47,8 @@ const App = () => {
             className="h-10 border-2 p-2 bg-green-400 justify-center items-center text-white font-poppins font-semibold text-[1rem] rounded-md pt-2 cursor-pointer px-0.75 rem py-1.5 rem  "
           >
             Submit Code
+    {output}
+
           </div> 
       </div>
           </header> 
